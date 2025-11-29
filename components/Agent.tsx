@@ -33,6 +33,7 @@ const Agent = ({
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+
   const [lastMessage, setLastMessage] = useState<string>("");
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const Agent = ({
         setMessages((prev) => [...prev, newMessage]);
       }
     };
-
+ 
     const onSpeechStart = () => {
       console.log("speech start");
       setIsSpeaking(true);
@@ -118,7 +119,7 @@ const Agent = ({
     setCallStatus(CallStatus.CONNECTING);
 
     if (type === "generate") {
-      await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+      await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID!, {
         variableValues: {
           username: userName,
           userid: userId,
@@ -173,6 +174,7 @@ const Agent = ({
               height={539}
               className="rounded-full object-cover size-[120px]"
             />
+            
             <h3>{userName}</h3>
           </div>
         </div>
